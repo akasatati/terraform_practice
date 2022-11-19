@@ -25,11 +25,7 @@ resource "aws_instance" "example" {
   instance_type = var.example_instance_type
   vpc_security_group_ids = [aws_security_group.example_ec2.id]
 
-  user_data = <<EOF
-    #!/bin/bash
-    yum install -y httpd
-    systemctl start httpd.service
-EOF
+  user_data = file("./user_data.sh")
 
   tags = {
     Name = "example"
